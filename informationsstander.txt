@@ -1,0 +1,5 @@
+12345678, Nikolaj Throksø, havrevej 6, 2020, fremmede, nikolajgt@hotmail.com
+12345677, blabla bla, hejsa 2, 2134, nemt, blalbalba@blablalba.com
+42541990, David jajaja, tropådet 5, 4040, forsjovt, yesyes@gmail.com
+12345666, Chris Hansen, torbyvej 32, 2032, Rødby, ChrisH@gmail.com
+
