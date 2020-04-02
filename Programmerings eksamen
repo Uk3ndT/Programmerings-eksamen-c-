@@ -30,7 +30,6 @@ namespace informationsstander
 
                 Console.Clear();
 
-
                 //OPRET BRUGER
                 if (brugervalg == "o")
                 {
@@ -73,7 +72,6 @@ namespace informationsstander
                     Console.ReadKey();
                 }
 
-
                 // Finder bestemt brugere
                 else if (brugervalg == "f")         
                 {
@@ -95,7 +93,6 @@ namespace informationsstander
                     Console.ReadKey();
                 }
 
-
                 // Viser alle brugere
                 else if (brugervalg == "v")
                 {
@@ -110,7 +107,6 @@ namespace informationsstander
                     }
 
                     Console.WriteLine("\n\nTryk enter for at komme tilbage");
-
                     Console.ReadKey();
                 }
 
