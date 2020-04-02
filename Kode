@@ -1,0 +1,128 @@
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace informationsstander
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            //Variabler
+            string navn, addresse, mail, postnr, by;
+
+            string brugervalg; 
+            bool loopdiwoop = true;
+            string filePath = @"C:\Users\nikol\source\repos\informationsstander.txt";                                           //Kun ændre den her sti for at skrive til txt fil
+
+            //Start af program
+            while (loopdiwoop)                                                                                                  //Programmet kører i et while loop, og loopet bliver kun afbrudt når du vælger mulighed q for at afslutte
+            {
+                start:
+                Console.Clear();
+                Console.WriteLine("    <<<< Velkommen til CMIS informationsstander >>>>\n\n\n\n\n\n\n\n\n\n\n\n");
+
+                Console.WriteLine("   [O] Opret   [F] Find   [V] Vis alle   [Q] Afslut");
+                brugervalg = Console.ReadLine().ToLower();
+
+                Console.Clear();
+
+
+                //OPRET BRUGER
+                if (brugervalg == "o")
+                {
+                    Console.Write("Tjekker om du er i databasen, skriv dit tlf nr: ");                                           //Indtaster det tlf du vil søge efter 
+                    string søgeefter = Console.ReadLine();
+
+                    string[] lines = System.IO.File.ReadAllLines(filePath);
+
+                    foreach (string line in lines)
+                    {
+                        if (line.Contains(søgeefter))                                                                           //Søger i arrays for at finde den rigtige array og viser det der står 
+                        {
+                            Console.Write("Du behøver ikke at oprette dig: \t");
+                            Console.Write(line);
+                            Console.ReadKey();
+                            goto start;
+                        }
+                    }
+                    
+                        Console.WriteLine("tlf nr kunne ikke findes i databasen, opret dig her :)\n");
+
+                        Console.Write("Navn og efternavn: ");                                                                  //Her opretter bruger sig
+                        navn = Console.ReadLine();
+                        Console.Write("Addresse: ");
+                        addresse = Console.ReadLine();
+                        Console.Write("Postnr: ");                                                                             //tlf kan findes i string søgeefter, fri for at bruger skriver det igen
+                        postnr = Console.ReadLine();                                                                      
+                        Console.Write("By: ");
+                        by = Console.ReadLine();
+                        Console.Write("Email: ");
+                        mail = Console.ReadLine();
+
+                        System.IO.File.ReadAllLines(filePath);
+
+                        using (System.IO.StreamWriter file = new System.IO.StreamWriter(filePath, true))
+                        {
+                            file.WriteLine("{0}, {1}, {2}, {3}, {4}, {5}", søgeefter, navn, addresse, postnr, by, mail);       //Skriver det i txt filen
+                        }
+                        Console.WriteLine("Du er nu oprettet i systemet! Tryk enter for at komme tilbage");
+                    Console.ReadKey();
+                }
+
+
+                // Finder bestemt brugere
+                else if (brugervalg == "f")         
+                {
+                    Console.Write("Hvad vil du søge efter?: ");                                                                 //Her indtaster bruger hvem han vil søge efter
+                    string søgestreng = Console.ReadLine();
+                    string[] lines = System.IO.File.ReadAllLines(filePath);
+
+                    foreach (string line in lines)
+                    {
+                        if (line.Contains(søgestreng))                                                                          //Her leder den i arrays for at finde den rigtige
+                        {
+                            var values = line.Split(',');                                                                       //Her splitter den efter hver komma i arrays, så informationerne bliver udskrevet under hindanden
+                            foreach (var value in values)
+                            {
+                                Console.WriteLine(value);
+                            }
+                        }
+                    }
+                    Console.ReadKey();
+                }
+
+
+                // Viser alle brugere
+                else if (brugervalg == "v")
+                {
+                    Console.Clear();                                            
+                    List<string> lines = new List<string>();                                                                    
+                    lines = File.ReadAllLines(filePath).ToList();                                                               //Her læser den alle og viser hvilket txt fil den skal udskrive fra
+                    Console.WriteLine("Alle i databasen \n");
+
+                    foreach (string line in lines)                                              
+                    {
+                        Console.WriteLine(line);                                                                                //Her udksriver den alle arrays fra txt filen
+                    }
+
+                    Console.WriteLine("\n\nTryk enter for at komme tilbage");
+
+                    Console.ReadKey();
+                }
+
+                // Afslutter program/loop
+                else if (brugervalg == "q")
+                {
+                    loopdiwoop = false;                                                                                          //Her afslutter loopet, og programmet aflsutter
+                    Console.WriteLine("Du har nu afsluttet programmet");
+                    Console.ReadKey();
+                }
+            }
+               
+        }
+    }
+}
